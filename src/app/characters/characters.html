@@ -1,0 +1,26 @@
+<div class="outer">
+    @for (character of data?.characters; track $index) {
+    <div class="characterCard">
+        <div class="imgDiv">
+            <img src="{{character.image}}" alt="">
+        </div>
+        <div class="infoDiv">
+            <div class="nameAndStatus">
+                <div class="name">{{ character.name }}</div>
+                <div class="status">
+                    <div class="circle {{character.status.toLowerCase() == 'alive' ? 'alive' : character.status.toLowerCase() == 'dead' ? 'dead' : 'unknown'}}"></div>
+                    <div class="statusDiv">{{ character.status }} - {{ character.species }}</div>
+                </div>
+            </div>
+            <div class="lastLocation">
+                <div class="header">Last known location:</div>
+                <div class="loc">{{ character.location.name }}</div>
+            </div>
+            <div class="lastLocation">
+                <div class="header">Last known location:</div>
+                <div class="loc">{{ character.origin.name }}</div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
