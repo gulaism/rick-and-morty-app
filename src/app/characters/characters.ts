@@ -12,15 +12,20 @@ export class Characters implements OnInit {
   constructor(private charactersService: CharactersService) { }
 
   ngOnInit() {
-    this.charactersService.getCharacters(1).subscribe(response => {
-      console.log(response || 'No response');
-      console.log(response.pageNumber);
+    this.charactersService.getCharacters().subscribe(response => {
       this.data = response;
+      console.log(response || 'No response');
     })
   }
 
   onClickNextPage() {
-    console.log('next page opened')
+      const nextPageUrl: string = this.data.info.next;
+
+      if (!nextPageUrl) return;
+
+      this.charactersService.getCharacters(nextPageUrl).subscribe(response => {
+        this.data = response;
+      });
   }
 
 }

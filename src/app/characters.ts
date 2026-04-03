@@ -11,12 +11,13 @@ export class CharactersService {
   constructor(private http: HttpClient) { }
 
 
-  getCharacters(pageIndex: number) {
-    return this.http.get<any>(`${this.apiUrl}?page=${pageIndex}`).pipe(
+  getCharacters(changedUrl?: string) {
+    const url = changedUrl || this.apiUrl;
+    return this.http.get<any>(`${url}`).pipe(
       map(res => ({
         total: res.info.count,
-        characters: res.results.slice(0, 6),
-        pageNumber: pageIndex
+        characters: res.results,
+        info: res.info,
       }))
     );
   }
