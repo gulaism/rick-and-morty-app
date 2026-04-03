@@ -15,7 +15,8 @@ export class CharactersService {
     return this.http.get<any>(`${this.apiUrl}?page=${pageIndex}`).pipe(
       map(res => ({
         total: res.info.count,
-        characters: res.results.slice(0, 6)
+        characters: res.results.slice(0, 6),
+        pageNumber: pageIndex
       }))
     );
   }

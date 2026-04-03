@@ -13,8 +13,14 @@ export class Characters implements OnInit {
 
   ngOnInit() {
     this.charactersService.getCharacters(1).subscribe(response => {
-      console.log(response);
+      console.log(response || 'No response');
+      console.log(response.pageNumber);
       this.data = response;
     })
   }
+
+  onClickNextPage() {
+    console.log('next page opened')
+  }
+
 }

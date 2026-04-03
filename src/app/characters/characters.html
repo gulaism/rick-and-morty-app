@@ -8,7 +8,9 @@
             <div class="nameAndStatus">
                 <div class="name">{{ character.name }}</div>
                 <div class="status">
-                    <div class="circle {{character.status.toLowerCase() == 'alive' ? 'alive' : character.status.toLowerCase() == 'dead' ? 'dead' : 'unknown'}}"></div>
+                    <div
+                        class="circle {{character.status.toLowerCase() == 'alive' ? 'alive' : character.status.toLowerCase() == 'dead' ? 'dead' : 'unknown'}}">
+                    </div>
                     <div class="statusDiv">{{ character.status }} - {{ character.species }}</div>
                 </div>
             </div>
@@ -23,4 +25,14 @@
         </div>
     </div>
     }
+
+
+
+
+</div>
+<div class="pagination">
+    <div class="page">1</div>
+    <div class="page">2</div>
+    <div class="page">3</div>
+    <div class="next"><img src="assets/nextIcon.svg" alt=""></div>
 </div>
