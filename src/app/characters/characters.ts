@@ -18,10 +18,24 @@ export class Characters implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.charactersService.getCharacters().subscribe((response) => {
-      this.data = { ...response };
+      this.data = response;
       console.log(response || 'No response');
       this.isLoading = false;
     });
+  }
+
+  onClickPreviousPage() {
+    const previousPageUrl: string = this.data.info.prev;
+    console.log(previousPageUrl);
+
+    if(!previousPageUrl) return;
+
+    this.charactersService.getCharacters(previousPageUrl).subscribe((response) => {
+      this.data = response;
+      console.log(this.data);
+      this.isLoading = false;
+      this.cdr.markForCheck();
+    })
   }
 
   onClickNextPage() {
@@ -30,7 +44,7 @@ export class Characters implements OnInit {
     if (!nextPageUrl) return;
 
     this.charactersService.getCharacters(nextPageUrl).subscribe((response) => {
-      this.data = { ...response };
+      this.data = response;
       console.log(this.data);
       this.isLoading = false;
       this.cdr.markForCheck();
