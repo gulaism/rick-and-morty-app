@@ -12,7 +12,7 @@ export class Characters implements OnInit {
   isLoading = true;
   pageArray: number[] = [];
   currentPage = 1;
-  visiblePages: number[] = [];
+  visiblePages: number[] = [1, 2, 3, 4, 5, 6, 7];
 
   constructor(
     private charactersService: CharactersService,
@@ -34,10 +34,10 @@ export class Characters implements OnInit {
   onClickPreviousPage() {
     const previousPageUrl: string = this.data.info.prev;
     // console.log(previousPageUrl);
+    if (!previousPageUrl) return;
     this.currentPage = this.currentPage - 1;
 
     this.updateVisiblePages();
-    if (!previousPageUrl) return;
 
     this.charactersService.getCharacters(previousPageUrl).subscribe((response) => {
       this.data = response;
@@ -49,10 +49,10 @@ export class Characters implements OnInit {
 
   onClickNextPage() {
     const nextPageUrl: string = this.data.info.next;
+    if (!nextPageUrl) return;
     this.currentPage = this.currentPage + 1;
 
     this.updateVisiblePages();
-    if (!nextPageUrl) return;
 
     this.charactersService.getCharacters(nextPageUrl).subscribe((response) => {
       this.data = response;
