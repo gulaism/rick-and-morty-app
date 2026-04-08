@@ -1,6 +1,5 @@
 @if (isLoading) {
- <div class="">Loading...</div>
-    
+ <div class="loading">Loading...</div>
 } @else {
    <div class="outer">
     @for (character of data.characters; track character.id) {
@@ -35,9 +34,9 @@
 <div class="pagination">
     <div class="prev" (click)="onClickPreviousPage()"><img src="assets/previousIcon.svg" alt=""></div>
 
-    <div class="page">1</div>
-    <div class="page">2</div>
-    <div class="page">3</div>
-
+    @for (page of visiblePages; track page) {
+        <div (click)="onPageSelected(page)" class="page"  [class.activePage]="page === currentPage">{{page}}</div>
+    }
+    
     <div class="next" (click)="onClickNextPage()"><img src="assets/nextIcon.svg" alt=""></div>
 </div>

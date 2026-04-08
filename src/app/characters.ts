@@ -11,8 +11,8 @@ export class CharactersService {
   constructor(private http: HttpClient) { }
 
 
-  getCharacters(changedUrl?: string) {
-    const url = changedUrl || this.apiUrl;
+  getCharacters(changedUrl?: string, page: number = 1) {
+    const url = changedUrl ? changedUrl : page ? `${this.apiUrl}?page=${page}` : this.apiUrl;
     return this.http.get<any>(`${url}`).pipe(
       map(res => ({
         total: res.info.count,
