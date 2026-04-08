@@ -1,0 +1,38 @@
+.searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    background-color: #9e9e9e !important;
+    margin: 15px;
+    border-radius: 42px;
+    gap: 6px;
+    overflow: hidden;
+    padding: 12px;
+    cursor: pointer;
+
+
+    .searchIcon {
+        width: max-content;
+        height: 100%;
+        object-fit: contain;
+        // margin-top: 18px;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    input {
+        width: 100%;
+        flex-grow: 1;
+        height: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
