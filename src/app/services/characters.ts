@@ -20,5 +20,16 @@ export class CharactersService {
         info: res.info,
       }))
     );
+
+    
   }
+  getCharactersByName(characterName?: string) {
+      const url = `${this.apiUrl}?name=${characterName}`;
+      return this.http.get<any>(`${url}`).pipe(
+        map(res => ({
+          foundCharactersByName: res.results,
+        }))
+      )
+
+    }
 }

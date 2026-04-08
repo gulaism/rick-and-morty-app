@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { CharactersService } from '../characters';
+import { CharactersService } from '../services/characters';
 import { response } from 'express';
 
 @Component({
@@ -21,6 +21,7 @@ export class Characters implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+    
     this.charactersService.getCharacters(undefined, this.currentPage).subscribe((response) => {
       this.data = response;
       console.log(response || 'No response');
