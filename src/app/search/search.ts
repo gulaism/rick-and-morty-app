@@ -19,14 +19,15 @@ export class Search {
     setTimeout(() => {
       this.searchedItem = event.target.value;
       console.log('Searched item: ', this.searchedItem);
+
+      if(!this.searchedItem.trim()) {
+        this.charactersService.currentSearchTerm = '';
+        this.charactersService.getCharacters(undefined, 1).subscribe();
+        return;
+      }
+      
       this.charactersService.getCharactersByName(this.searchedItem).subscribe({
-        next: (response) => {
-          this.data = response;
-          
-          if(response.characters.length === 0) {
-            console.log('No characters found for: ', this.searchedItem);
-          } 
-        },
+        
         error: (err) => {
           console.error('Error occurred while searching:', err);
         },
