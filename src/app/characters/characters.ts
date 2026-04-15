@@ -22,14 +22,22 @@ export class Characters implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     
-    this.charactersService.getCharacters(undefined, this.currentPage).subscribe((response) => {
+    this.charactersService.characters$.subscribe((response) => {
+      if(!response) return;
       this.data = response;
-      console.log(response || 'No response');
-      this.pageArray = Array.from({ length: response.info.pages }, (_, i) => i + 1);
       this.isLoading = false;
+
+      console.log(response || 'No response');
+
+      if(response.info?.pages) {
+        this.pageArray = Array.from({ length: response.info.pages }, (_, i) => i + 1);
+        this.updateVisiblePages();
+      }
+
       this.cdr.detectChanges();
-      this.updateVisiblePages();
     });
+
+    this.charactersService.getCharacters(undefined, this.currentPage).subscribe();
   }
 
   onClickPreviousPage() {
@@ -40,12 +48,7 @@ export class Characters implements OnInit {
 
     this.updateVisiblePages();
 
-    this.charactersService.getCharacters(previousPageUrl).subscribe((response) => {
-      this.data = response;
-      // console.log(this.data);
-      this.isLoading = false;
-      this.cdr.markForCheck();
-    });
+    this.charactersService.getCharacters(previousPageUrl).subscribe();
   }
 
   onClickNextPage() {
@@ -55,12 +58,7 @@ export class Characters implements OnInit {
 
     this.updateVisiblePages();
 
-    this.charactersService.getCharacters(nextPageUrl).subscribe((response) => {
-      this.data = response;
-      // console.log(this.data);
-      this.isLoading = false;
-      this.cdr.markForCheck();
-    });
+    this.charactersService.getCharacters(nextPageUrl).subscribe();
   }
 
   // updateVisiblePages() {
@@ -95,10 +93,6 @@ export class Characters implements OnInit {
     // console.log('Selected page:', page)
     this.currentPage = page;
     this.updateVisiblePages();
-    this.charactersService.getCharacters(undefined, page).subscribe((response) => {
-      this.data = response;
-      this.isLoading = false;
-      this.cdr.markForCheck();
-    });
+    this.charactersService.getCharacters(undefined, page).subscribe();
   }
 }

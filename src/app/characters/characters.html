@@ -1,6 +1,10 @@
 @if (isLoading) {
  <div class="loading">Loading...</div>
-} @else {
+} @else if(data?.characters?.length === 0) {
+    <div class="noResults">No characters found.</div>
+}
+
+@else {
    <div class="outer">
     @for (character of data.characters; track character.id) {
     <div class="characterCard">

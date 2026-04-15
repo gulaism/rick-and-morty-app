@@ -11,8 +11,9 @@ import { error } from 'console';
 export class Search {
   searchedItem: string = '';
   data: any;
-
+  
   constructor(private charactersService: CharactersService) {}
+
 
   onSearchCharacter(event: any) {
     setTimeout(() => {
@@ -21,11 +22,10 @@ export class Search {
       this.charactersService.getCharactersByName(this.searchedItem).subscribe({
         next: (response) => {
           this.data = response;
-          console.log(
-            'Search response: ',
-            this.data.foundCharactersByName || 'No characters found',
-          );
           
+          if(response.characters.length === 0) {
+            console.log('No characters found for: ', this.searchedItem);
+          } 
         },
         error: (err) => {
           console.error('Error occurred while searching:', err);
