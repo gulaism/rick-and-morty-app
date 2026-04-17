@@ -20,9 +20,9 @@
     @if(isFiltersOpen) {
         @if (activeFilter === 'status') {
             <div class="statusOptions">
-                <div>Alive</div>
-                <div>Dead</div>
-                <div>Unknown</div>
+                <div (click)="filterByStatus('alive')">Alive</div>
+                <div (click)="filterByStatus('dead')">Dead</div>
+                <div (click)="filterByStatus('unknown')">Unknown</div>
             </div>
         } @else if(activeFilter === 'gender') {
             <div class="statusOptions">
