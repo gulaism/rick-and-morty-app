@@ -4,13 +4,16 @@
     display: flex;
     align-items: center;
     background-color: white;
+    position: relative;
 
     img {
         width: 250px;
         height: 250px;
         color: #f5f5f5;
-        position: relative;
-        inset: 0 40%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
         // margin: 0 auto;
     }
 
