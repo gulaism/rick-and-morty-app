@@ -14,6 +14,7 @@ export class Characters implements OnInit {
   currentPage = 1;
   visiblePages: number[] = [1, 2, 3, 4, 5, 6, 7];
 
+  
   constructor(
     private charactersService: CharactersService,
     private cdr: ChangeDetectorRef,

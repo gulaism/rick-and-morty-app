@@ -1,0 +1,38 @@
+<div class="filterContainer">
+    <div (click)="toggleFilters()" class="filtersHeader">
+        <div>Filters</div>
+        <img [src]="isFiltersOpen ? '/assets/arrow-up.svg' : '/assets/arrow-down.svg'" alt="">
+    </div>
+
+    @if (isFiltersOpen) {
+    <div class="allFilters">
+        <div (click)="setActiveFilter('status')" class="status">
+            <img src="/assets/previousIcon.svg" alt="">
+            <div>Status</div>
+        </div>
+        <div (click)="setActiveFilter('gender')" class="status">
+            <img src="/assets/previousIcon.svg" alt="">
+            <div>Gender</div>
+        </div>
+    </div>
+    }
+
+    @if(isFiltersOpen) {
+        @if (activeFilter === 'status') {
+            <div class="statusOptions">
+                <div>Alive</div>
+                <div>Dead</div>
+                <div>Unknown</div>
+            </div>
+        } @else if(activeFilter === 'gender') {
+            <div class="statusOptions">
+                <div>Female</div>
+                <div>Male</div>
+                <div>Genderless</div>
+                <div>Unknown</div>
+            </div>
+        }
+    }
+
+</div>
+<!-- /assets/arrow-down.svg -->

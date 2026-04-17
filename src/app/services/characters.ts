@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { error } from 'console';
+// import { error } from 'console';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class CharactersService {
         return formatted;
       }),
       catchError((error) => {
-        if(error.status === 400) {
+        if(error.status === 400 || error.status === 404) {
           const emptyResult = {
             total: 0,
             characters: [],

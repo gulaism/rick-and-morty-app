@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CharactersService } from '../services/characters';
-import { error } from 'console';
+// import { error } from 'console';
 
 @Component({
   selector: 'app-search',
