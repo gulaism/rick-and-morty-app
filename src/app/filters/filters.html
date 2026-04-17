@@ -26,10 +26,10 @@
             </div>
         } @else if(activeFilter === 'gender') {
             <div class="statusOptions">
-                <div>Female</div>
-                <div>Male</div>
-                <div>Genderless</div>
-                <div>Unknown</div>
+                <div (click)="filterByGender('female')">Female</div>
+                <div (click)="filterByGender('male')">Male</div>
+                <div (click)="filterByGender('genderless')">Genderless</div>
+                <div (click)="filterByGender('unknown')">Unknown</div>
             </div>
         }
     }

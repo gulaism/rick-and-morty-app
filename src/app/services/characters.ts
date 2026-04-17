@@ -12,6 +12,7 @@ export class CharactersService {
   characters$ = this.charactersSubject.asObservable();
   currentSearchTerm: string = '';
   currentStatusFilter: string = '';
+  currentGenderFilter: string = '';
 
 
   constructor(private http: HttpClient) { }
@@ -26,6 +27,7 @@ export class CharactersService {
       const params: string[] = [];
       if(this.currentSearchTerm) params.push(`name=${this.currentSearchTerm}`);
       if(this.currentStatusFilter) params.push(`status=${this.currentStatusFilter}`);
+      if(this.currentGenderFilter) params.push(`gender=${this.currentGenderFilter}`);
       if(page) params.push(`page=${page}`);
       url = params.length ? `${this.apiUrl}?${params.join('&')}` : this.apiUrl;
     }
@@ -66,6 +68,12 @@ export class CharactersService {
   getCharactersByStatus(status: string) {
     console.log('Filtering by status: ', status);
     this.currentStatusFilter = status;
+    return this.getCharacters(undefined, 1);
+  }
+
+  getCharactersByGender(gender: string) {
+    console.log('active gender is: ', gender);
+    this.currentGenderFilter = gender;
     return this.getCharacters(undefined, 1);
   }
 

@@ -10,7 +10,9 @@ import { CharactersService } from '../services/characters';
 export class Filters {
   isFiltersOpen: boolean = false;
   activeFilter!: string;
+
   activeStatus!: string;
+  activeGender!: string;
 
   constructor(private charactersService: CharactersService) {}
 
@@ -36,6 +38,23 @@ export class Filters {
     this.charactersService.getCharactersByStatus(this.activeStatus).subscribe({
       error: (err) => {
         console.error('Error occurred while filtering by status: ', err);
+      }
+    });
+  }
+
+  filterByGender(gender: string) {
+    this.activeGender = gender.toLowerCase();
+    console.log(this.activeGender, ' is the active gender');
+
+    if(!this.activeGender.trim()) {
+      this.charactersService.currentGenderFilter = '';
+      this.charactersService.getCharacters(undefined, 1);
+      return;
+    }
+
+    this.charactersService.getCharactersByGender(this.activeGender).subscribe({
+      error: (err) => {
+        console.error('Error occurred while filtering by gender: ', err);
       }
     });
   }
