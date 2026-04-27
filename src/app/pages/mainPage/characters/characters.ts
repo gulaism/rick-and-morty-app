@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { CharactersService } from '../services/characters';
+import { CharactersService } from '../../../services/characters';
 import { response } from 'express';
 
 @Component({
@@ -14,7 +14,6 @@ export class Characters implements OnInit {
   currentPage = 1;
   visiblePages: number[] = [1, 2, 3, 4, 5, 6, 7];
 
-  
   constructor(
     private charactersService: CharactersService,
     private cdr: ChangeDetectorRef,
@@ -22,15 +21,15 @@ export class Characters implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    
+
     this.charactersService.characters$.subscribe((response) => {
-      if(!response) return;
+      if (!response) return;
       this.data = response;
       this.isLoading = false;
 
       console.log(response || 'No response');
 
-      if(response.info?.pages) {
+      if (response.info?.pages) {
         this.pageArray = Array.from({ length: response.info.pages }, (_, i) => i + 1);
         this.updateVisiblePages();
       }

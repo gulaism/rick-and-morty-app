@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CharactersService } from '../services/characters';
+import { CharactersService } from '../../../services/characters';
 
 @Component({
   selector: 'app-filters',
@@ -18,7 +18,7 @@ export class Filters {
 
   toggleFilters() {
     this.isFiltersOpen = !this.isFiltersOpen;
-    if(!this.isFiltersOpen) this.activeFilter = '';
+    if (!this.isFiltersOpen) this.activeFilter = '';
   }
 
   setActiveFilter(filter: string) {
@@ -29,7 +29,7 @@ export class Filters {
     this.activeStatus = status.toLowerCase();
     console.log('Active status: ', this.activeStatus);
 
-    if(!this.activeStatus.trim()) {
+    if (!this.activeStatus.trim()) {
       this.charactersService.currentStatusFilter = '';
       this.charactersService.getCharacters(undefined, 1);
       return;
@@ -38,7 +38,7 @@ export class Filters {
     this.charactersService.getCharactersByStatus(this.activeStatus).subscribe({
       error: (err) => {
         console.error('Error occurred while filtering by status: ', err);
-      }
+      },
     });
   }
 
@@ -46,7 +46,7 @@ export class Filters {
     this.activeGender = gender.toLowerCase();
     console.log(this.activeGender, ' is the active gender');
 
-    if(!this.activeGender.trim()) {
+    if (!this.activeGender.trim()) {
       this.charactersService.currentGenderFilter = '';
       this.charactersService.getCharacters(undefined, 1);
       return;
@@ -55,8 +55,7 @@ export class Filters {
     this.charactersService.getCharactersByGender(this.activeGender).subscribe({
       error: (err) => {
         console.error('Error occurred while filtering by gender: ', err);
-      }
+      },
     });
   }
-
 }
