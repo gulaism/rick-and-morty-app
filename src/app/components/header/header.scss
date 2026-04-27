@@ -1,10 +1,67 @@
 :host {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    height: 60px;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid transparent;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        min-height: 60px;
+        padding: 0px 1.5rem;
+
+
+        .home-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(51, 51, 51);
+            border-width: medium;
+            border-style: none;
+            border-color: currentColor;
+            border-image: initial;
+            text-decoration: none;
+            background-color: transparent;
+            cursor: pointer;
+
+
+            img {
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+            }
+        }
+
+
+        ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+
+            li {
+                margin-right: 1.75rem; 
+                padding-left: 0;  
+                list-style-type: none;
+                display: list-item;
+                
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+        }
+    }
 }

@@ -5,10 +5,17 @@
 </div>
 <app-characters /> -->
 
-<app-header></app-header>
+<app-page-header></app-page-header>
 
 <main class="main-content">
-    <router-outlet></router-outlet>
+    <router-outlet>
+        <app-header />
+        <div class="filter">
+            <app-search />
+            <app-filters />
+        </div>
+        <app-characters />
+    </router-outlet>
 </main>
 
 <app-footer></app-footer>
