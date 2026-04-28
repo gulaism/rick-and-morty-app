@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { CharactersService } from '../../services/characters';
+import { LocationsService } from '../../services/locations';
 
 @Component({
   selector: 'app-footer',
@@ -6,4 +8,22 @@ import { Component } from '@angular/core';
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
-export class Footer {}
+export class Footer {
+  charsNum = signal(0);
+  locNum = signal(0);
+  epNum = signal(0);
+
+  constructor(
+    private charactersService: CharactersService,
+    private locationsService: LocationsService,
+  ) {}
+
+  ngOnInit() {
+    this.charactersService.characters$.subscribe((response) => {
+      this.charsNum.set(response?.total);
+    })
+    this.locationsService.getAllLocations().subscribe((response) => {
+      this.locNum.set(response?.info?.count);
+    })
+  }
+}

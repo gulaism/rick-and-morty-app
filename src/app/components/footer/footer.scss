@@ -1,7 +1,36 @@
 :host {
-    display: block;
-    background-color: red;
-    color: #fff;
-    padding: 20px;
+    display: flex;
+    background: rgb(32, 35, 41);
+    color: rgb(158, 158, 158);
+    padding: 4.5rem 0;
     text-align: center;
+    min-height: 120px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer {
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0;
+
+
+        li {
+            margin-left: 1.5rem;
+            list-style-type: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: bold;
+
+            &:first-child {
+                margin: 0;
+            }
+        }
+    }
 }
