@@ -7,16 +7,12 @@
 
 html {
   height: 100%;
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$magenta-palette,
+  @include mat.theme((color: (primary: mat.$magenta-palette,
         tertiary: mat.$violet-palette,
       ),
       typography: Roboto,
       density: 0,
-    )
-  );
+    ));
 }
 
 body {
@@ -36,6 +32,7 @@ body {
   margin: 0;
   height: 100%;
 }
+
 /* You can add global styles to this file, and also import other style files */
 * {
   box-sizing: border-box;
@@ -54,4 +51,12 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+
+
+  a {
+    transition: 0.1s;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
 }
