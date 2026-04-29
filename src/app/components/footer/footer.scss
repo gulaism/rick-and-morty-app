@@ -12,7 +12,7 @@
 }
 
 .footer {
-    ul {
+    .overallInfo {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -30,6 +30,26 @@
 
             &:first-child {
                 margin: 0;
+            }
+        }
+    }
+
+
+    .gitLink {
+        margin-top: 1.25rem;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        margin: 0 auto;
+        padding: 0;
+        width: 100%;
+
+
+        a {
+            img {
+                width: 18px;
+                height: 18px;
+                color: red;
             }
         }
     }
