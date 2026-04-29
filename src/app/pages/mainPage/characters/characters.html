@@ -1,37 +1,39 @@
 @if (isLoading) {
- <div class="loading">Loading...</div>
+<div class="loading">Loading...</div>
 } @else if(data?.characters?.length === 0) {
-    <div class="noResults">No characters found.</div>
+<div class="noResults">No characters found.</div>
 }
 
 @else {
-   <div class="outer">
-    @for (character of data.characters; track character.id) {
-    <div class="characterCard">
-        <div class="imgDiv">
-            <img src="{{character.image}}" alt="">
-        </div>
-        <div class="infoDiv">
-            <div class="nameAndStatus">
-                <div class="name">{{ character.name }}</div>
-                <div class="status">
-                    <div
-                        class="circle {{character.status.toLowerCase() == 'alive' ? 'alive' : character.status.toLowerCase() == 'dead' ? 'dead' : 'unknown'}}">
+<div class="outer">
+    <div class="charactersDiv">
+        @for (character of data.characters; track character.id) {
+        <div class="characterCard">
+            <div class="imgDiv">
+                <img src="{{character.image}}" alt="">
+            </div>
+            <div class="infoDiv">
+                <div class="nameAndStatus">
+                    <div class="name">{{ character.name }}</div>
+                    <div class="status">
+                        <div
+                            class="circle {{character.status.toLowerCase() == 'alive' ? 'alive' : character.status.toLowerCase() == 'dead' ? 'dead' : 'unknown'}}">
+                        </div>
+                        <div class="statusDiv">{{ character.status }} - {{ character.species }}</div>
                     </div>
-                    <div class="statusDiv">{{ character.status }} - {{ character.species }}</div>
+                </div>
+                <div class="lastLocation">
+                    <div class="header">Last known location:</div>
+                    <div class="loc">{{ character.location.name }}</div>
+                </div>
+                <div class="lastLocation">
+                    <div class="header">First known location:</div>
+                    <div class="loc">{{ character.origin.name }}</div>
                 </div>
             </div>
-            <div class="lastLocation">
-                <div class="header">Last known location:</div>
-                <div class="loc">{{ character.location.name }}</div>
-            </div>
-            <div class="lastLocation">
-                <div class="header">First known location:</div>
-                <div class="loc">{{ character.origin.name }}</div>
-            </div>
         </div>
+        }
     </div>
-    }
 </div>
 }
 
@@ -39,8 +41,8 @@
     <div class="prev" (click)="onClickPreviousPage()"><img src="assets/previousIcon.svg" alt=""></div>
 
     @for (page of visiblePages; track page) {
-        <div (click)="onPageSelected(page)" class="page"  [class.activePage]="page === currentPage">{{page}}</div>
+    <div (click)="onPageSelected(page)" class="page" [class.activePage]="page === currentPage">{{page}}</div>
     }
-    
+
     <div class="next" (click)="onClickNextPage()"><img src="assets/nextIcon.svg" alt=""></div>
 </div>
