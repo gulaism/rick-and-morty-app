@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CharactersService } from '../../../services/characters';
 import { response } from 'express';
+import { ActivatedRoute, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.html',
   styleUrl: './characters.scss',
+  imports: [RouterLink],
 })
 export class Characters implements OnInit {
   data: any;
@@ -17,6 +19,7 @@ export class Characters implements OnInit {
   constructor(
     private charactersService: CharactersService,
     private cdr: ChangeDetectorRef,
+    private router: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -94,5 +97,9 @@ export class Characters implements OnInit {
     this.currentPage = page;
     this.updateVisiblePages();
     this.charactersService.getCharacters(undefined, page).subscribe();
+  }
+
+  onClickCharacterDetails(characterId: number) {
+    console.log('Character clicked: ', characterId);
   }
 }

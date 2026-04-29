@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
-import { CharactersService } from '../../services/characters';
-import { LocationsService } from '../../services/locations';
-import { EpisodesService } from '../../services/episodes';
+import { CharactersService } from '../../../services/characters';
+import { LocationsService } from '../../../services/locations';
+import { EpisodesService } from '../../../services/episodes';
 
 @Component({
   selector: 'app-footer',
@@ -23,12 +23,12 @@ export class Footer {
   ngOnInit() {
     this.charactersService.characters$.subscribe((response) => {
       this.charsNum.set(response?.total);
-    })
+    });
     this.locationsService.getAllLocations().subscribe((response) => {
       this.locNum.set(response?.info?.count);
-    })
-    this.episodesService.getAllEpisodes().subscribe((response => {
+    });
+    this.episodesService.getAllEpisodes().subscribe((response) => {
       this.epNum.set(response?.info?.count);
-    }))
+    });
   }
 }

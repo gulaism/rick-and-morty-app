@@ -8,7 +8,7 @@
 <div class="outer">
     <div class="charactersDiv">
         @for (character of data.characters; track character.id) {
-        <div class="characterCard">
+        <div role="button" [routerLink]="['/details', character.id]" class="characterCard">
             <div class="imgDiv">
                 <img src="{{character.image}}" alt="">
             </div>

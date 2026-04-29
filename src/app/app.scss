@@ -10,20 +10,3 @@
 }
 
 
-.filter {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 15px;
-
-    app-search {
-        flex: 1;
-        min-width: 0;
-    }
-
-    app-filters {
-        width: max-content;
-        flex-shrink: 0;
-    }
-}

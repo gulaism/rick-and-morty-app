@@ -1,15 +1,16 @@
 import { Component, Input, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { PageHeader } from './pages/mainPage/page-header/page-header';
-import { Characters } from './pages/mainPage/characters/characters';
-import { Search } from './pages/mainPage/search/search';
-import { Filters } from './pages/mainPage/filters/filters';
-import { Header } from "./components/header/header";
-import { Footer } from "./components/footer/footer";
+import { PageHeader } from './components/home/page-header/page-header';
+import { Characters } from './components/home/characters/characters';
+import { Search } from './components/home/search/search';
+import { Filters } from './components/home/filters/filters';
+import { Header } from './components/layout/header/header';
+import { Footer } from './components/layout/footer/footer';
+import { HomePage } from "./pages/home-page/home-page";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PageHeader, Characters, Search, Filters, Header, Footer],
+  imports: [RouterOutlet, PageHeader, Characters, Search, Filters, Header, Footer, HomePage],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

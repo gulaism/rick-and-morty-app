@@ -3,6 +3,22 @@ import { Injectable } from '@angular/core';
 // import { error } from 'console';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 
+export interface Character {
+  "id": number,
+  "name": string,
+  "status": string,
+  "species": string,
+  "gender": string,
+  "origin": {
+    "name": string,
+  },
+  "location": {
+    "name": string,
+  },
+  "image": string,
+  "episode": string[],
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -77,6 +93,8 @@ export class CharactersService {
     return this.getCharacters(undefined, 1);
   }
 
-
+  getOneCharacter(characterId: number) {
+    return this.http.get<Character>(`${this.apiUrl}/${characterId}`);
+  }
 
 }
