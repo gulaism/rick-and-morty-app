@@ -1,0 +1,36 @@
+.charDetails {
+    padding: 15px;
+
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        // border: 1px solid rgb(255, 152, 0);
+        // font-size: 0.75rem;
+        text-align: center;
+        font-size: 16px;
+        margin: 0;
+        padding: 9px 12px;
+        gap: 9px;
+
+
+        &:hover {
+            // background-color: rgb(255, 152, 0);
+            color: #9e9e9e;
+            border: 1px solid transparent;
+        }
+
+
+        img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+    }
+}
