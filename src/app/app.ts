@@ -10,7 +10,7 @@ import { HomePage } from "./pages/home-page/home-page";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PageHeader, Characters, Search, Filters, Header, Footer, HomePage],
+  imports: [RouterOutlet, Header, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
