@@ -1,6 +1,8 @@
+@use 'variables' as *;
+
 :host {
     display: flex;
-    background: rgb(32, 35, 41);
+    background: $primary-color;
     color: rgb(158, 158, 158);
     padding: 4.5rem 0;
     text-align: center;

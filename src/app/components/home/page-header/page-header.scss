@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .header {
     // width: 100%;
     height: calc(-60px + 50vh);
@@ -27,7 +29,7 @@
 
     h1 {
         margin: 0;
-        color: rgb(32, 35, 41);
+        color: $primary-color;
         z-index: 1;
         font-weight: 900;
         font-size: 5.625rem;
