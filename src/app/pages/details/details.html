@@ -1,6 +1,45 @@
 <div class="charDetails">
-    <button>
+    <button routerLink="/">
         <img src="assets/previousIcon.svg" alt="back to home page">
         <div>Back to Characters</div>
     </button>
+
+    <div class="charInfo">
+        @if (chosenCharacter()) {
+        <div class="left">
+            <div class="photoContainer">
+                <img [src]="chosenCharacter()!.image" alt="Character's photo">
+                <div class="status">
+                    {{chosenCharacter()!.status}}
+                </div>
+            </div>
+            <div class="line"></div>
+        </div>
+        <div class="right">
+            <div class="header">
+                <div>ID: #{{chosenCharacter()!.id}}</div>
+                <span>·</span>
+                <div>{{chosenCharacter()!.species}}</div>
+            </div>
+            <div class="name">
+                {{chosenCharacter()!.name}}
+            </div>
+            <div class="features">
+                <div class="ft">
+                    <div class="gender">Gender</div>
+                    <div class="data">{{chosenCharacter()!.gender}}</div>
+                </div>
+                <div class="ft">
+                    <div class="type">Type</div>
+                    <div class="data">
+                        @if (!chosenCharacter()!.type) { — }
+                        @else { {{chosenCharacter()!.type}} }
+                    </div>
+                </div>
+            </div>
+        </div>
+        } @else {
+        <div>Loading...</div>
+        }
+    </div>
 </div>

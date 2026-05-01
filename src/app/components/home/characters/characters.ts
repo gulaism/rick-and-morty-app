@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CharactersService } from '../../../services/characters';
 import { response } from 'express';
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-characters',
@@ -15,6 +16,7 @@ export class Characters implements OnInit {
   pageArray: number[] = [];
   currentPage = 1;
   visiblePages: number[] = [1, 2, 3, 4, 5, 6, 7];
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private charactersService: CharactersService,
@@ -25,7 +27,9 @@ export class Characters implements OnInit {
   ngOnInit() {
     this.isLoading = true;
 
-    this.charactersService.characters$.subscribe((response) => {
+    this.charactersService.characters$
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe((response) => {
       if (!response) return;
       this.data = response;
       this.isLoading = false;
@@ -40,7 +44,9 @@ export class Characters implements OnInit {
       this.cdr.detectChanges();
     });
 
-    this.charactersService.getCharacters(undefined, this.currentPage).subscribe();
+    this.charactersService.getCharacters(undefined, this.currentPage)
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe();
   }
 
   onClickPreviousPage() {
