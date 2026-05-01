@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 // import { error } from 'console';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 
@@ -27,9 +27,9 @@ export class CharactersService {
   private apiUrl = 'https://rickandmortyapi.com/api/character';
   private charactersSubject = new BehaviorSubject<any>(null);
   characters$ = this.charactersSubject.asObservable();
-  currentSearchTerm: string = '';
-  currentStatusFilter: string = '';
-  currentGenderFilter: string = '';
+  currentSearchTerm = signal<string>('');
+  currentStatusFilter = signal<string>('');
+  currentGenderFilter = signal<string>('');
 
 
   constructor(private http: HttpClient) { }
@@ -42,9 +42,9 @@ export class CharactersService {
       url = urlOrName;
     } else {
       const params: string[] = [];
-      if(this.currentSearchTerm) params.push(`name=${this.currentSearchTerm}`);
-      if(this.currentStatusFilter) params.push(`status=${this.currentStatusFilter}`);
-      if(this.currentGenderFilter) params.push(`gender=${this.currentGenderFilter}`);
+      if(this.currentSearchTerm()) params.push(`name=${this.currentSearchTerm()}`);
+      if(this.currentStatusFilter()) params.push(`status=${this.currentStatusFilter()}`);
+      if(this.currentGenderFilter()) params.push(`gender=${this.currentGenderFilter()}`);
       if(page) params.push(`page=${page}`);
       url = params.length ? `${this.apiUrl}?${params.join('&')}` : this.apiUrl;
     }
@@ -78,19 +78,19 @@ export class CharactersService {
   }
 
   getCharactersByName(characterName: string) {
-    this.currentSearchTerm = characterName;
+    this.currentSearchTerm.set(characterName);
     return this.getCharacters(undefined, 1);
   }
 
   getCharactersByStatus(status: string) {
     console.log('Filtering by status: ', status);
-    this.currentStatusFilter = status;
+    this.currentStatusFilter.set(status);
     return this.getCharacters(undefined, 1);
   }
 
   getCharactersByGender(gender: string) {
     console.log('active gender is: ', gender);
-    this.currentGenderFilter = gender;
+    this.currentGenderFilter.set(gender);
     return this.getCharacters(undefined, 1);
   }
 

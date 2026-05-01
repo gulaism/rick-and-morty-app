@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CharactersService } from '../../../services/characters';
-// import { error } from 'console';
 
 @Component({
   selector: 'app-search',
@@ -9,23 +8,23 @@ import { CharactersService } from '../../../services/characters';
   styleUrl: './search.scss',
 })
 export class Search {
-  searchedItem: string = '';
-  data: any;
+  searchedItem = signal<string>('');
+  data = signal<any>;
 
   constructor(private charactersService: CharactersService) {}
 
   onSearchCharacter(event: any) {
     setTimeout(() => {
-      this.searchedItem = event.target.value;
-      console.log('Searched item: ', this.searchedItem);
+      this.searchedItem.set(event.target.value);
+      console.log('Searched item: ', this.searchedItem());
 
-      if (!this.searchedItem.trim()) {
-        this.charactersService.currentSearchTerm = '';
+      if (!this.searchedItem().trim()) {
+        this.charactersService.currentSearchTerm.set('');
         this.charactersService.getCharacters(undefined, 1).subscribe();
         return;
       }
 
-      this.charactersService.getCharactersByName(this.searchedItem).subscribe({
+      this.charactersService.getCharactersByName(this.searchedItem()).subscribe({
         error: (err) => {
           console.error('Error occurred while searching:', err);
         },

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CharactersService } from '../../../services/characters';
 
 @Component({
@@ -8,34 +8,34 @@ import { CharactersService } from '../../../services/characters';
   styleUrl: './filters.scss',
 })
 export class Filters {
-  isFiltersOpen: boolean = false;
-  activeFilter!: string;
+  isFiltersOpen = signal(false);
+  activeFilter = signal<string>('');
 
-  activeStatus!: string;
-  activeGender!: string;
+  activeStatus = signal<string>('');
+  activeGender = signal<string>('');
 
   constructor(private charactersService: CharactersService) {}
 
   toggleFilters() {
-    this.isFiltersOpen = !this.isFiltersOpen;
-    if (!this.isFiltersOpen) this.activeFilter = '';
+    this.isFiltersOpen.set(!this.isFiltersOpen());
+    if (!this.isFiltersOpen()) this.activeFilter.set('');
   }
 
   setActiveFilter(filter: string) {
-    this.activeFilter = filter;
+    this.activeFilter.set(filter);
   }
 
   filterByStatus(status: string) {
-    this.activeStatus = status.toLowerCase();
-    console.log('Active status: ', this.activeStatus);
+    this.activeStatus.set(status.toLowerCase());
+    console.log('Active status: ', this.activeStatus());
 
-    if (!this.activeStatus.trim()) {
-      this.charactersService.currentStatusFilter = '';
+    if (!this.activeStatus().trim()) {
+      this.charactersService.currentStatusFilter.set('');
       this.charactersService.getCharacters(undefined, 1);
       return;
     }
 
-    this.charactersService.getCharactersByStatus(this.activeStatus).subscribe({
+    this.charactersService.getCharactersByStatus(this.activeStatus()).subscribe({
       error: (err) => {
         console.error('Error occurred while filtering by status: ', err);
       },
@@ -43,16 +43,16 @@ export class Filters {
   }
 
   filterByGender(gender: string) {
-    this.activeGender = gender.toLowerCase();
-    console.log(this.activeGender, ' is the active gender');
+    this.activeGender.set(gender.toLowerCase());
+    console.log(this.activeGender(), ' is the active gender');
 
-    if (!this.activeGender.trim()) {
-      this.charactersService.currentGenderFilter = '';
+    if (!this.activeGender().trim()) {
+      this.charactersService.currentGenderFilter.set('');
       this.charactersService.getCharacters(undefined, 1);
       return;
     }
 
-    this.charactersService.getCharactersByGender(this.activeGender).subscribe({
+    this.charactersService.getCharactersByGender(this.activeGender()).subscribe({
       error: (err) => {
         console.error('Error occurred while filtering by gender: ', err);
       },

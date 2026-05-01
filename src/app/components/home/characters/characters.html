@@ -1,13 +1,13 @@
-@if (isLoading) {
+@if (isLoading()) {
 <div class="loading">Loading...</div>
-} @else if(data?.characters?.length === 0) {
+} @else if(data()?.characters?.length === 0) {
 <div class="noResults">No characters found.</div>
 }
 
 @else {
 <div class="outer">
     <div class="charactersDiv">
-        @for (character of data.characters; track character.id) {
+        @for (character of data().characters; track character.id) {
         <div role="button" [routerLink]="['/details', character.id]" class="characterCard">
             <div class="imgDiv">
                 <img src="{{character.image}}" alt="">
@@ -40,8 +40,8 @@
 <div class="pagination">
     <div class="prev" (click)="onClickPreviousPage()"><img src="assets/previousIcon.svg" alt=""></div>
 
-    @for (page of visiblePages; track page) {
-    <div (click)="onPageSelected(page)" class="page" [class.activePage]="page === currentPage">{{page}}</div>
+    @for (page of visiblePages(); track page) {
+    <div (click)="onPageSelected(page)" class="page" [class.activePage]="page === currentPage()">{{page}}</div>
     }
 
     <div class="next" (click)="onClickNextPage()"><img src="assets/nextIcon.svg" alt=""></div>

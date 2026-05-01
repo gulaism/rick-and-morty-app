@@ -12,15 +12,15 @@ export class Details {
   private route = inject(ActivatedRoute);
   private charactersService = inject(CharactersService);
   chosenCharacter = signal<Character | null>(null);
-  id!: string;
+  id = signal<string>('');
 
   
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.id = params['id'];
-      console.log('Id from route: ', this.id);
-      this.charactersService.getOneCharacter(Number(this.id)).subscribe((response) => {
+      this.id.set(params['id']);
+      console.log('Id from route: ', this.id());
+      this.charactersService.getOneCharacter(Number(this.id())).subscribe((response) => {
         this.chosenCharacter.set(response);
         console.log('Chosen character: ', this.chosenCharacter());
       })
