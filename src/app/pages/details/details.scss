@@ -96,6 +96,7 @@
             justify-content: space-between;
             height: 100%;
             gap: 3px;
+            // width: 50%;
 
 
             .header {
@@ -136,6 +137,22 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media(max-width: 768px) {
+    .charInfo {
+        flex-direction: column;
+
+
+        .line {
+            display: none;
+        }
+
+
+        .right {
+            width: 100%;
         }
     }
 }
