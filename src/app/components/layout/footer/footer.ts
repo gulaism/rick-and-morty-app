@@ -11,17 +11,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './footer.scss',
 })
 export class Footer {
+  private charactersService = inject(CharactersService);
+  private locationsService = inject(LocationsService);
+  private episodesService = inject(EpisodesService);
   charsNum = signal(0);
   locNum = signal(0);
   epNum = signal(0);
   private destroyRef = inject(DestroyRef);
 
-
-  constructor(
-    private charactersService: CharactersService,
-    private locationsService: LocationsService,
-    private episodesService: EpisodesService,
-  ) {}
 
   ngOnInit() {
     this.charactersService.characters$

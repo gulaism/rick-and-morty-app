@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CharactersService } from '../../../services/characters';
 
 @Component({
@@ -8,10 +8,10 @@ import { CharactersService } from '../../../services/characters';
   styleUrl: './search.scss',
 })
 export class Search {
+  private charactersService = inject(CharactersService);
   searchedItem = signal<string>('');
   data = signal<any>;
 
-  constructor(private charactersService: CharactersService) {}
 
   onSearchCharacter(event: any) {
     setTimeout(() => {

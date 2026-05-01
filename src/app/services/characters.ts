@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 // import { error } from 'console';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 
@@ -24,15 +24,13 @@ export interface Character {
   providedIn: 'root',
 })
 export class CharactersService {
+  private http = inject(HttpClient);
   private apiUrl = 'https://rickandmortyapi.com/api/character';
   private charactersSubject = new BehaviorSubject<any>(null);
   characters$ = this.charactersSubject.asObservable();
   currentSearchTerm = signal<string>('');
   currentStatusFilter = signal<string>('');
   currentGenderFilter = signal<string>('');
-
-
-  constructor(private http: HttpClient) { }
 
 
   getCharacters(urlOrName?: string, page?: number) {

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CharactersService } from '../../../services/characters';
 
 @Component({
@@ -8,13 +8,13 @@ import { CharactersService } from '../../../services/characters';
   styleUrl: './filters.scss',
 })
 export class Filters {
+  private charactersService = inject(CharactersService);
   isFiltersOpen = signal(false);
   activeFilter = signal<string>('');
 
   activeStatus = signal<string>('');
   activeGender = signal<string>('');
 
-  constructor(private charactersService: CharactersService) {}
 
   toggleFilters() {
     this.isFiltersOpen.set(!this.isFiltersOpen());

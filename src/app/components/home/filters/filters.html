@@ -1,17 +1,17 @@
 <div class="filterContainer">
     <div (click)="toggleFilters()" class="filtersHeader">
         <div>Filters</div>
-        <img [src]="isFiltersOpen() ? '/assets/arrow-up.svg' : '/assets/arrow-down.svg'" alt="">
+        <img [src]="isFiltersOpen() ? '/assets/arrow-up.svg' : '/assets/arrow-down.svg'" alt="Toggle filter">
     </div>
 
     @if (isFiltersOpen()) {
     <div class="allFilters">
         <div (click)="setActiveFilter('status')" class="status">
-            <img src="/assets/previousIcon.svg" alt="">
+            <img src="/assets/previousIcon.svg" alt="Open Status">
             <div>Status</div>
         </div>
         <div (click)="setActiveFilter('gender')" class="status">
-            <img src="/assets/previousIcon.svg" alt="">
+            <img src="/assets/previousIcon.svg" alt="Open Gender">
             <div>Gender</div>
         </div>
     </div>
