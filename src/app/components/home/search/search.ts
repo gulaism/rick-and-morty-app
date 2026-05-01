@@ -3,7 +3,6 @@ import { CharactersService } from '../../../services/characters';
 
 @Component({
   selector: 'app-search',
-  imports: [],
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
@@ -13,9 +12,10 @@ export class Search {
   data = signal<any>;
 
 
-  onSearchCharacter(event: any) {
+  onSearchCharacter(event: Event): void {
+    const input = event.target as HTMLInputElement;
     setTimeout(() => {
-      this.searchedItem.set(event.target.value);
+      this.searchedItem.set(input.value);
       console.log('Searched item: ', this.searchedItem());
 
       if (!this.searchedItem().trim()) {
@@ -25,7 +25,7 @@ export class Search {
       }
 
       this.charactersService.getCharactersByName(this.searchedItem()).subscribe({
-        error: (err) => {
+        error: (err: Error) => {
           console.error('Error occurred while searching:', err);
         },
       });

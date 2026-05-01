@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { CharactersService } from '../../../services/characters';
+import { CharactersResponse, CharactersService } from '../../../services/characters';
 import { response } from 'express';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,18 +13,19 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class Characters implements OnInit {
   private charactersService = inject(CharactersService);
   private destroyRef = inject(DestroyRef);
-  data = signal<any>(null);
+
+  data = signal<CharactersResponse | null>(null);
   isLoading = signal(true);
   pageArray = signal<number[]>([]);
   currentPage = signal(1);
   visiblePages = signal<number[]>([1, 2, 3, 4, 5, 6, 7]);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isLoading.set(true);
 
     this.charactersService.characters$
     .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe((response) => {
+    .subscribe((response: CharactersResponse | null) => {
       if (!response) return;
       this.data.set(response);
       this.isLoading.set(false);
@@ -41,8 +42,7 @@ export class Characters implements OnInit {
   }
 
   onClickPreviousPage() {
-    const previousPageUrl: string = this.data().info.prev;
-    // console.log(previousPageUrl);
+    const previousPageUrl: string = this.data()!.info.prev;
     if (!previousPageUrl) return;
     this.currentPage.set(this.currentPage() - 1);
 
@@ -51,8 +51,8 @@ export class Characters implements OnInit {
     this.charactersService.getCharacters(previousPageUrl).subscribe();
   }
 
-  onClickNextPage() {
-    const nextPageUrl: string = this.data().info.next;
+  onClickNextPage(): void {
+    const nextPageUrl: string = this.data()!.info.next;
     if (!nextPageUrl) return;
     this.currentPage.set(this.currentPage() + 1);
 
@@ -60,12 +60,12 @@ export class Characters implements OnInit {
 
     this.charactersService.getCharacters(nextPageUrl).subscribe();
   }
-  updateVisiblePages() {
-    const totalPages = this.data().info.pages;
-    const maxVisible = 7;
+  updateVisiblePages(): void {
+    const totalPages: number = this.data()!.info.pages;
+    const maxVisible: number = 7;
 
-    let start = this.currentPage() - Math.floor(maxVisible / 2);
-    let end = this.currentPage() + Math.floor(maxVisible / 2);
+    let start: number = this.currentPage() - Math.floor(maxVisible / 2);
+    let end: number = this.currentPage() + Math.floor(maxVisible / 2);
 
     if (start < 1) {
       start = 1;
@@ -80,14 +80,13 @@ export class Characters implements OnInit {
     this.visiblePages.set(Array.from({ length: end - start + 1 }, (_, i) => start + i));
   }
 
-  onPageSelected(page: number) {
-    // console.log('Selected page:', page)
+  onPageSelected(page: number): void {
     this.currentPage.set(page);
     this.updateVisiblePages();
     this.charactersService.getCharacters(undefined, page).subscribe();
   }
 
-  onClickCharacterDetails(characterId: number) {
+  onClickCharacterDetails(characterId: number): void {
     console.log('Character clicked: ', characterId);
   }
 }

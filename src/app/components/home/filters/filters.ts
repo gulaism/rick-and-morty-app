@@ -3,7 +3,6 @@ import { CharactersService } from '../../../services/characters';
 
 @Component({
   selector: 'app-filters',
-  imports: [],
   templateUrl: './filters.html',
   styleUrl: './filters.scss',
 })
@@ -16,16 +15,16 @@ export class Filters {
   activeGender = signal<string>('');
 
 
-  toggleFilters() {
+  toggleFilters(): void {
     this.isFiltersOpen.set(!this.isFiltersOpen());
     if (!this.isFiltersOpen()) this.activeFilter.set('');
   }
 
-  setActiveFilter(filter: string) {
+  setActiveFilter(filter: string): void {
     this.activeFilter.set(filter);
   }
 
-  filterByStatus(status: string) {
+  filterByStatus(status: string): void {
     this.activeStatus.set(status.toLowerCase());
     console.log('Active status: ', this.activeStatus());
 
@@ -42,7 +41,7 @@ export class Filters {
     });
   }
 
-  filterByGender(gender: string) {
+  filterByGender(gender: string): void {
     this.activeGender.set(gender.toLowerCase());
     console.log(this.activeGender(), ' is the active gender');
 
@@ -53,7 +52,7 @@ export class Filters {
     }
 
     this.charactersService.getCharactersByGender(this.activeGender()).subscribe({
-      error: (err) => {
+      error: (err: Error) => {
         console.error('Error occurred while filtering by gender: ', err);
       },
     });

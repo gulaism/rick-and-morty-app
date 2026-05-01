@@ -12,11 +12,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // grid-template-columns: repeat(2, 1fr);
-    // gap: 1.5rem;
+    
     padding: 4.5rem 0px;
-    // max-width: 1920px;
-    // margin: 0 auto;
+    
     min-height: calc(-60px + 50vh);
 
 
@@ -35,17 +33,11 @@
             border-radius: 0.5rem;
             background-color: $secondary-color;
             box-shadow: $box-shadow;
-            // align-items: center;
-            // justify-content: left;
+        
             margin: 0.75rem;
             cursor: pointer;
 
             .imgDiv {
-                // min-width: 230px;
-                // height: 220px;
-                // object-fit: contain;
-                // overflow: hidden;
-
 
                 img {
                     width: 100%;

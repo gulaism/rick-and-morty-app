@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-// import { error } from 'console';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 
 export interface Character {
@@ -20,13 +19,24 @@ export interface Character {
   "episode": string[],
 }
 
+export interface CharactersResponse {
+  "total": number,
+  "characters": Character[],
+  "info": {
+    "count": number,
+    "pages": number,
+    "next": string,
+    "prev": string,
+  },
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class CharactersService {
   private http = inject(HttpClient);
   private apiUrl = 'https://rickandmortyapi.com/api/character';
-  private charactersSubject = new BehaviorSubject<any>(null);
+  private charactersSubject = new BehaviorSubject<CharactersResponse | null>(null);
   characters$ = this.charactersSubject.asObservable();
   currentSearchTerm = signal<string>('');
   currentStatusFilter = signal<string>('');
@@ -49,8 +59,8 @@ export class CharactersService {
 
 
     return this.http.get<any>(url).pipe(
-      map((res) => {
-        const formatted = {
+      map((res): CharactersResponse => {
+        const formatted: CharactersResponse = {
           total: res.info.count,
           characters: res.results,
           info: res.info,
@@ -61,10 +71,10 @@ export class CharactersService {
       }),
       catchError((error) => {
         if(error.status === 400 || error.status === 404) {
-          const emptyResult = {
+          const emptyResult: CharactersResponse = {
             total: 0,
             characters: [],
-            info: {count: 0, pages: 0},
+            info: {count: 0, pages: 0, next: '', prev: ''},
           };
           this.charactersSubject.next(emptyResult);
           return of(emptyResult);

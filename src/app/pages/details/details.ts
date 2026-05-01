@@ -18,7 +18,7 @@ export class Details {
 
   
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe(params => {

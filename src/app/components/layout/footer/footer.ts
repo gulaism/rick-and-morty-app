@@ -1,12 +1,11 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { CharactersService } from '../../../services/characters';
+import { CharactersResponse, CharactersService } from '../../../services/characters';
 import { LocationsService } from '../../../services/locations';
 import { EpisodesService } from '../../../services/episodes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
@@ -20,11 +19,11 @@ export class Footer {
   private destroyRef = inject(DestroyRef);
 
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.charactersService.characters$
     .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe((response) => {
-      this.charsNum.set(response?.total);
+    .subscribe((response: CharactersResponse | null) => {
+      this.charsNum.set(response?.total ?? 0);
     });
     this.locationsService.getAllLocations().subscribe((response) => {
       this.locNum.set(response?.info?.count);

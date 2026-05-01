@@ -17,14 +17,12 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        // padding-bottom: 12px;
         white-space: nowrap;
         margin: 0;
 
         img {
             width: 16px;
             height: 16px;
-            // margin-left: 8px;
             object-fit: contain;
         }
 
@@ -34,7 +32,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        // padding: 12px;
         margin-top: 12px;
         gap: 6px;
         
@@ -42,8 +39,6 @@
             display: flex;
             justify-content: start;
             align-items: center;
-            // justify-content: center;
-            // padding: 0 12px;
             width: 100%;
             font-size: 16px;
             gap: 6px;
@@ -60,7 +55,6 @@
     .statusOptions {
         background-color: $main-gray;
         position: absolute;
-        // left: -105px;
         right: 105%;
         width: max-content;
         top: 50%;

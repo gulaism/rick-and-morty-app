@@ -1,7 +1,6 @@
 @use 'variables' as *;
 
 .header {
-    // width: 100%;
     height: calc(-60px + 50vh);
     display: flex;
     flex-direction: column;
@@ -35,6 +34,5 @@
         font-size: 5.625rem;
         padding-bottom: 0 0 calc(0.40625rem - 1px) 0;
         line-height: 1.1;
-        // white-space: nowrap;
     }
 }
