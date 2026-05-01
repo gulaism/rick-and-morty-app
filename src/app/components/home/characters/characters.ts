@@ -37,9 +37,7 @@ export class Characters implements OnInit {
       }
     });
 
-    this.charactersService.getCharacters(undefined, this.currentPage())
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe();
+    this.charactersService.getCharacters(undefined, this.currentPage()).subscribe();
   }
 
   onClickPreviousPage() {

@@ -48,7 +48,7 @@ export class Filters {
 
     if (!this.activeGender().trim()) {
       this.charactersService.currentGenderFilter.set('');
-      this.charactersService.getCharacters(undefined, 1);
+      this.charactersService.getCharacters(undefined, 1).subscribe();
       return;
     }
 
