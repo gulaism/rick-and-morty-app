@@ -30,8 +30,6 @@ export class Characters implements OnInit {
       this.data.set(response);
       this.isLoading.set(false);
 
-      console.log(response || 'No response');
-
       if (response.info?.pages) {
         this.pageArray.set(Array.from({ length: response.info.pages }, (_, i) => i + 1));
         this.updateVisiblePages();
@@ -86,7 +84,4 @@ export class Characters implements OnInit {
     this.charactersService.getCharacters(undefined, page).subscribe();
   }
 
-  onClickCharacterDetails(characterId: number): void {
-    console.log('Character clicked: ', characterId);
-  }
 }

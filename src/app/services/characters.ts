@@ -91,13 +91,11 @@ export class CharactersService {
   }
 
   getCharactersByStatus(status: string) {
-    console.log('Filtering by status: ', status);
     this.currentStatusFilter.set(status);
     return this.getCharacters(undefined, 1);
   }
 
   getCharactersByGender(gender: string) {
-    console.log('active gender is: ', gender);
     this.currentGenderFilter.set(gender);
     return this.getCharacters(undefined, 1);
   }

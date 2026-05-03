@@ -26,7 +26,6 @@ export class Filters {
 
   filterByStatus(status: string): void {
     this.activeStatus.set(status.toLowerCase());
-    console.log('Active status: ', this.activeStatus());
 
     if (!this.activeStatus().trim()) {
       this.charactersService.currentStatusFilter.set('');
@@ -43,7 +42,6 @@ export class Filters {
 
   filterByGender(gender: string): void {
     this.activeGender.set(gender.toLowerCase());
-    console.log(this.activeGender(), ' is the active gender');
 
     if (!this.activeGender().trim()) {
       this.charactersService.currentGenderFilter.set('');

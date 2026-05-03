@@ -14,9 +14,8 @@ export class Search {
 
   onSearchCharacter(event: Event): void {
     const input = event.target as HTMLInputElement;
-    setTimeout(() => {
+    
       this.searchedItem.set(input.value);
-      console.log('Searched item: ', this.searchedItem());
 
       if (!this.searchedItem().trim()) {
         this.charactersService.currentSearchTerm.set('');
@@ -29,6 +28,6 @@ export class Search {
           console.error('Error occurred while searching:', err);
         },
       });
-    });
+    
   }
 }

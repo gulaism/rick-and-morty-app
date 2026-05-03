@@ -23,10 +23,8 @@ export class Details {
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe(params => {
       this.id.set(params['id']);
-      console.log('Id from route: ', this.id());
       this.charactersService.getOneCharacter(Number(this.id())).subscribe((response) => {
         this.chosenCharacter.set(response);
-        console.log('Chosen character: ', this.chosenCharacter());
       })
     })
 
